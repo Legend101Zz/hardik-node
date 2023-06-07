@@ -3,22 +3,21 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const express = require("express");
-const app = express();
-const port = process.env.PORT || 3000;
-
+const mongoose = require("mongoose");
 const cors = require("cors");
 
-const mongoose = require("mongoose");
+const app = express();
+
+const port = process.env.PORT || 3000;
 
 app.use(cors());
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //API_ROUTES
-const apiRoutes = require("./routes/api");
+const apiRoutes = require("./routes/task.route");
 
-app.use("/api/v1/", apiRoutes);
+app.use("/tasks", apiRoutes);
 
 // SERVER CONNECTION
 mongoose
