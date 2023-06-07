@@ -61,15 +61,15 @@ module.exports.editTask = async (req, res, next) => {
   console.log(req.body);
   const { title, isCompleted, startTime, endTime, repeated } = req.body;
   await Task.findByIdAndUpdate(id, {
-    title,
-    isCompleted,
-    startTime,
-    endTime,
-    repeated,
+    title: title,
+    isCompleted: isCompleted,
+    startTime: startTime,
+    endTime: endTime,
+    repeated: repeated,
   })
     .then((result) => {
       console.log(result);
-      res.status(200).send({ message: "Success", data: result });
+      res.status(200).send({ message: "Success" });
     })
     .catch((err) => {
       console.log(err);
