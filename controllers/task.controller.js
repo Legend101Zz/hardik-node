@@ -53,3 +53,41 @@ module.exports.getSingleTask = async (req, res, next) => {
       console.log(err);
     });
 };
+
+//for editing a single task
+
+module.exports.editTask = async (req, res, next) => {
+  const id = req.params.id;
+  console.log(req.body);
+  const { title, isCompleted, startTime, endTime, repeated } = req.body;
+  await Task.findByIdAndUpdate(id, {
+    title,
+    isCompleted,
+    startTime,
+    endTime,
+    repeated,
+  })
+    .then((result) => {
+      console.log(result);
+      res.status(200).send({ message: "Success", data: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+//for deleting a single task
+
+module.exports.deleteTask = async (req, res, next) => {
+  const id = req.params.id;
+  console.log(req.body);
+  const { title, isCompleted, startTime, endTime, repeated } = req.body;
+  await Task.findByIdAndDelete(id)
+    .then((result) => {
+      console.log(result);
+      res.status(200).send({ message: "Success", data: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
